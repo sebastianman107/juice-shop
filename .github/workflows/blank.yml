@@ -11,6 +11,12 @@ jobs:
     - uses: actions/checkout@v3
     - name: Build the Docker image
       run: docker build -t web-app . && docker run -dp 3000:3000 web-app
+    - name: Create test user
+      run: curl -i -s -k -X $'POST' \
+    -H $'Host: localhost:3000' -H $'Content-Length: 234' -H $'sec-ch-ua: \" Not A;Brand\";v=\"99\", \"Chromium\";v=\"104\"' -H $'Accept: application/json, text/plain, */*' -H $'Content-Type: application/json' -H $'sec-ch-ua-mobile: ?0' -H $'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36' -H $'sec-ch-ua-platform: \"macOS\"' -H $'Origin: http://localhost:3000' -H $'Sec-Fetch-Site: same-origin' -H $'Sec-Fetch-Mode: cors' -H $'Sec-Fetch-Dest: empty' -H $'Referer: http://localhost:3000/' -H $'Accept-Encoding: gzip, deflate' -H $'Accept-Language: en-GB,en-US;q=0.9,en;q=0.8' -H $'Connection: close' \
+    -b $'language=en; welcomebanner_status=dismiss' \
+    --data-binary $'{\"email\":\"test@test.com\",\"password\":\"test1\",\"passwordRepeat\":\"test1\",\"securityQuestion\":{\"id\":2,\"question\":\"Mother\'s maiden name?\",\"createdAt\":\"2022-11-11T13:38:41.754Z\",\"updatedAt\":\"2022-11-11T13:38:41.754Z\"},\"securityAnswer\":\"test\"}' \
+    $'http://localhost:3000/api/Users/'
     - name: ZAP Scan
       uses: zaproxy/action-full-scan@v0.4.0
       with:
