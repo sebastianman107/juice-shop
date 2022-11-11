@@ -13,7 +13,7 @@ jobs:
       run: docker build -t web-app . && docker run -dp 3000:3000 web-app
     - name: Create test user
       run: |
-        curl -X POST "http://localhost:3000/api/Users/" \
+        curl "http://localhost:3000/api/Users/" \
         --data-binary $'{\"email\":\"test@test.com\",\"password\":\"test1\",\"passwordRepeat\":\"test1\",\"securityQuestion\":{\"id\":2,\"question\":\"Mother\'s maiden name?\",\"createdAt\":\"2022-11-11T13:38:41.754Z\",\"updatedAt\":\"2022-11-11T13:38:41.754Z\"},\"securityAnswer\":\"test\"}'
     - name: ZAP Scan
       uses: zaproxy/action-full-scan@v0.4.0
