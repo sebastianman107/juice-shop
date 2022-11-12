@@ -21,6 +21,7 @@ jobs:
           $'http://localhost:3000/api/Users/'
     - name: Get bearer token
       run: |
+        sleep 5;
         ZAP_AUTH_HEADER_VALUE="Bearer "$(curl -X $'POST' \
           -H $'Host: localhost:3000' -H $'Content-Length: 44' -H $'sec-ch-ua: \" Not A;Brand\";v=\"99\", \"Chromium\";v=\"104\"' -H $'Accept: application/json, text/plain, */*' -H $'Content-Type: application/json' -H $'X-User-Email: test@test.com' -H $'sec-ch-ua-mobile: ?0' -H $'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36' -H $'sec-ch-ua-platform: \"macOS\"' -H $'Origin: http://localhost:3000' -H $'Sec-Fetch-Site: same-origin' -H $'Sec-Fetch-Mode: cors' -H $'Sec-Fetch-Dest: empty' -H $'Referer: http://localhost:3000/' -H $'Accept-Encoding: gzip, deflate' -H $'Accept-Language: en-GB,en-US;q=0.9,en;q=0.8' -H $'Connection: close' \
           -b $'language=en; welcomebanner_status=dismiss; cookieconsent_status=dismiss; continueCode=E3OzQenePWoj4zk293aRX8KbBNYEAo9GL5qO1ZDwp6JyVxgQMmrlv7npKLVy' \
