@@ -27,14 +27,14 @@ jobs:
           --data-binary $'{\"email\":\"test@test.com\",\"password\":\"test1\"}' \
           $'http://localhost:3000/rest/user/login' | jq -r '.authentication.token')
     - name: Export vars
-      run: ZAP_AUTH_HEADER="Authorization" && export ZAP_AUTH_HEADER && export ZAP_AUTH_HEADER_VALUE
-    - name: Print vars
-      run: echo "$ZAP_AUTH_HEADER_VALUE"
+      run: |
+        ZAP_AUTH_HEADER="Authorization" && export ZAP_AUTH_HEADER && export ZAP_AUTH_HEADER_VALUE
+        echo Variable: $ZAP_AUTH_HEADER_VALUE
     - name: ZAP Scan
       uses: zaproxy/action-full-scan@v0.4.0
       with:
         target: 'http://localhost:3000'
-        cmd_options: -z " \
+        cmd_options: -d -z " \
           -config replacer.full_list\\(0\\).description=auth1 \  
           -config replacer.full_list\\(0\\).enabled=true \  
           -config replacer.full_list\\(0\\).matchtype=REQ_HEADER \  
