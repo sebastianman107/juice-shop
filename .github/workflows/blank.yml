@@ -29,9 +29,9 @@ jobs:
     - name: Export vars
       run: ZAP_AUTH_HEADER="Authorization" && export ZAP_AUTH_HEADER && export ZAP_AUTH_HEADER_VALUE
     - name: Print vars
-      run: echo $ZAP_AUTH_HEADER_VALUE
+      run: echo "$ZAP_AUTH_HEADER_VALUE"
     - name: ZAP Scan
       uses: zaproxy/action-full-scan@v0.4.0
       with:
         target: 'http://localhost:3000'
-        cmd_options: -n .zap/zap.context
+        cmd_options: -z "-configfile .zap/options.prop"
