@@ -4,7 +4,7 @@
         <name>Default Context</name>
         <desc/>
         <inscope>true</inscope>
-        <incregexes>http://127.0.0.1:3000/.*</incregexes>
+        <incregexes>http://localhost.*</incregexes>
         <tech>
             <include>Db</include>
             <include>Db.CouchDB</include>
