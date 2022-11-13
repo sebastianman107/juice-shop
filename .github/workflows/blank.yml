@@ -30,6 +30,7 @@ jobs:
       with:
         target: 'http://localhost:3000'
         cmd_options: -d -a \ 
+          -n .zap/zap.context
           -z "-config replacer.full_list\\(0\\).description=auth1 \  
           -config replacer.full_list\\(0\\).enabled=true \  
           -config replacer.full_list\\(0\\).matchtype=REQ_HEADER \  
